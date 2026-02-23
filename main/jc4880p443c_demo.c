@@ -173,7 +173,7 @@ static esp_err_t display_init(esp_lcd_panel_handle_t *ret_panel, esp_lcd_panel_i
         .dpi_clk_src = MIPI_DSI_DPI_CLK_SRC_DEFAULT,
         .dpi_clock_freq_mhz = pclk_mhz,
         .virtual_channel = 0,
-        .pixel_format = LCD_COLOR_PIXEL_FORMAT_RGB565,
+        .pixel_format = LCD_COLOR_PIXEL_FORMAT_RGB888,
         .num_fbs = 2,
         .video_timing = {
             .h_size = DISPLAY_H_RES,
@@ -205,7 +205,7 @@ static esp_err_t display_init(esp_lcd_panel_handle_t *ret_panel, esp_lcd_panel_i
     esp_lcd_panel_dev_config_t panel_config = {
         .reset_gpio_num = PIN_LCD_RST,
         .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
-        .bits_per_pixel = 16,
+        .bits_per_pixel = 24,
         .vendor_config = &vendor_config,
     };
     
