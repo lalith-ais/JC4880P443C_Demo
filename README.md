@@ -15,5 +15,4 @@ A clean, properly-architected driver for the AliExpress JC4880P443C display modu
 ```bash
 git clone https://github.com/yourusername/ESP32P4-JC4880P443C.git
 cd ESP32P4-JC4880P443C
-idf.py set-target esp32p4
-idf.py build flash monitor
+idf.py -p /dev/ttyACM0 build flash monitor
