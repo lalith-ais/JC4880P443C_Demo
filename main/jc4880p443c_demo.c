@@ -294,15 +294,7 @@ static lv_display_t *lvgl_display_init(esp_lcd_panel_handle_t panel)
     void *buf2 = heap_caps_malloc(LVGL_BUFFER_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
     assert(buf1 && buf2);
     
-    // LVGL 9.5.0 uses lv_draw_buf_t for buffers
-    lv_draw_buf_t *draw_buf1 = lv_draw_buf_create(LVGL_BUFFER_SIZE, 1, 
-                                                   LV_COLOR_FORMAT_RGB565, 
-                                                   LV_STRIDE_AUTO);
-    lv_draw_buf_t *draw_buf2 = lv_draw_buf_create(LVGL_BUFFER_SIZE, 1, 
-                                                   LV_COLOR_FORMAT_RGB565, 
-                                                   LV_STRIDE_AUTO);
-    
-    // Alternative simpler method for LVGL 9.5.0
+    // LVGL 9.5.0 API - set buffers directly (no draw_buf_t variables needed)
     lv_display_set_buffers(disp, buf1, buf2, LVGL_BUFFER_SIZE * sizeof(lv_color_t), 
                            LV_DISPLAY_RENDER_MODE_PARTIAL);
     
