@@ -276,19 +276,36 @@ static void lvgl_port_task(void *arg)
     }
 }
 
+// ============================================================================
+// LVGL Port - Updated for LVGL 9.5.0
+// ============================================================================
+
 static lv_display_t *lvgl_display_init(esp_lcd_panel_handle_t panel)
 {
     lv_init();
     ESP_ERROR_CHECK(lvgl_tick_init());
     
+    // Create display
     lv_display_t *disp = lv_display_create(DISPLAY_H_RES, DISPLAY_V_RES);
     assert(disp);
     
+    // Allocate draw buffers
     void *buf1 = heap_caps_malloc(LVGL_BUFFER_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
     void *buf2 = heap_caps_malloc(LVGL_BUFFER_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
     assert(buf1 && buf2);
     
-    lv_display_set_draw_buffers(disp, buf1, buf2, LVGL_BUFFER_SIZE, LV_DISPLAY_RENDER_MODE_PARTIAL);
+    // LVGL 9.5.0 uses lv_draw_buf_t for buffers
+    lv_draw_buf_t *draw_buf1 = lv_draw_buf_create(LVGL_BUFFER_SIZE, 1, 
+                                                   LV_COLOR_FORMAT_RGB565, 
+                                                   LV_STRIDE_AUTO);
+    lv_draw_buf_t *draw_buf2 = lv_draw_buf_create(LVGL_BUFFER_SIZE, 1, 
+                                                   LV_COLOR_FORMAT_RGB565, 
+                                                   LV_STRIDE_AUTO);
+    
+    // Alternative simpler method for LVGL 9.5.0
+    lv_display_set_buffers(disp, buf1, buf2, LVGL_BUFFER_SIZE * sizeof(lv_color_t), 
+                           LV_DISPLAY_RENDER_MODE_PARTIAL);
+    
     lv_display_set_flush_cb(disp, lvgl_flush_callback);
     lv_display_set_user_data(disp, panel);
     
