@@ -44,8 +44,8 @@ uint16_t DISPLAY_H_RES, DISPLAY_V_RES;
 // Touch pins
 #define PIN_TOUCH_SCL                (GPIO_NUM_8)
 #define PIN_TOUCH_SDA                (GPIO_NUM_7)
-#define PIN_TOUCH_RST                (GPIO_NUM_35)
-#define PIN_TOUCH_INT                (GPIO_NUM_3)
+#define PIN_TOUCH_RST                (GPIO_NUM_22)
+#define PIN_TOUCH_INT                (GPIO_NUM_21)
 #define TOUCH_I2C_PORT               (I2C_NUM_0)
 #define TOUCH_I2C_FREQ_HZ            (400000)
 
